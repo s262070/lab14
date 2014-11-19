@@ -1,6 +1,6 @@
 #########################################
 #
-#    70pt - Basic collision detection
+# 70pt - Basic collision detection
 #
 #########################################
 
@@ -21,39 +21,32 @@ player = drawpad.create_rectangle(240,240,260,260, fill="pink")
 
 
 class MyApp:
-	def __init__(self, parent):
-	        # Make sure the drawpad is accessible from inside the function
-	        global drawpad
-		self.myParent = parent  
-		self.myContainer1 = Frame(parent)
-		self.myContainer1.pack()
-		
-		self.button1 = Button(self.myContainer1)
-		self.button1.configure(text="Up", background= "green")
-		self.button1.grid(row=0,column=0)
-					
-		# "Bind" an action to the first button												
-		self.button1.bind("<Button-1>", self.button1Click)
-
-		  
-		# This creates the drawpad - no need to change this 
-		drawpad.pack()
-		
-
-		
-	def button1Click(self, event):   
-                # "global" makes sure that we can access our oval and our drawpad
-		global oval
-		global drawpad
-                x1,y1,x2,y2 = drawpad.coords(player)
-		global targetx1, targety1, targetx2, targety2
-
-
-		# Ensure that we are doing our collision detection
-		# After we move our object!
-	
-	
-		
+    def __init__(self, parent):
+    # Make sure the drawpad is accessible from inside the function
+        global drawpad
+        self.myParent = parent
+        self.myContainer1 = Frame(parent)
+        self.myContainer1.pack()
+        self.button1 = Button(self.myContainer1)
+        self.button1.configure(text="Up", background= "green")
+        self.button1.grid(row=0,column=0)
+        # "Bind" an action to the first button
+        self.button1.bind("<Button-1>", self.button1Click)
+        
+        # This creates the drawpad - no need to change this
+        drawpad.pack()
+    
+    def button1Click(self, event):
+        # "global" makes sure that we can access our oval and our drawpad
+        global oval
+        global drawpad
+        x1,y1,x2,y2 = drawpad.coords(player)
+        global targetx1, targety1, targetx2, targety2
+        drawpad.move(player,0,-20)
+        if (targetx1 < x1 and targetx2 > x2) and (targety1 < y1 and targety2 > y2):
+            drawpad.itemconfig(target,fill="red")
+# Ensure that we are doing our collision detection
+# After we move our object!
 myapp = MyApp(root)
 
 root.mainloop()
